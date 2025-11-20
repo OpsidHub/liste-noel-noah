@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎄 La Merveilleuse Liste de Noël de Noah 🌟</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --noel-rouge: #A82424;
+            --noel-vert: #145A32;
+            --noel-or: #FFD700;
+            --noel-fond: #F8F9FA;
+        }
+
+        body {
+            background-color: var(--noel-fond);
+            /*font-family: 'Georgia', serif;*/
+            padding-bottom: 50px;
+        }
+
+        /* Styles du Header */
+        .header-noel {
+            background-color: var(--noel-rouge);
+            color: white;
+            padding: 30px 0;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative; /* Pour positionner les flocons */
+            overflow: hidden; /* Pour que les flocons ne dépassent pas */
+        }
+
+        /* Styles des Cartes (inchangés) */
+        .card-noel {
+            border: 3px solid var(--noel-vert);
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+        }
+
+        .card-noel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-title-noel {
+            color: var(--noel-rouge);
+            font-weight: bold;
+        }
+
+        .card-price {
+            color: var(--noel-vert);
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* MODIFICATION: Cursor pointer pour indiquer la cliquabilité */
+        .img-link {
+            cursor: pointer;
+            display: block; /* Pour que l'ancre occupe tout l'espace de l'image */
+        }
+        
+        .img-card {
+            max-height: 200px;
+            object-fit: contain;
+            width: 100%;
+            border-bottom: 1px solid #ddd;
+            padding: 10px;
+            background-color: white;
+        }
+
+        /* Styles Spécifiques aux Flocons */
+        #header-flocons {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Pour que les clics passent à travers */
+            z-index: 1; /* S'assurer qu'ils sont derrière le texte */
+        }
+        
+        .header-noel > * {
+            position: relative;
+            z-index: 2; /* S'assurer que le texte est au-dessus des flocons */
+        }
+
+        .flocon {
+            position: absolute;
+            top: -10px; /* Commence au-dessus du header */
+            border-radius: 50%;
+            opacity: 0.8;
+            /* Animation CSS pour la descente et le mouvement latéral */
+            animation: flocon-fall linear infinite;
+        }
+
+        /* Animation de chute */
+        @keyframes flocon-fall {
+            0% {
+                transform: translateY(0) translateX(0);
+            }
+            100% {
+                transform: translateY(150px) translateX(var(--mouvement-lateral)); /* Descend plus bas que la hauteur du header */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header-noel">
+        <div id="header-flocons"></div>
+
+        <h1>🌟 La Liste de Noël de Noah 🎅</h1>
+        <p class="lead">Cher Père Noël, voici ce qui ferait plaisir à Noah cette année !</p>
+    </header>
+
+    <div class="container">
+        <div id="wishlist-container" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            </div>
+    </div>
+
+    <script id="christmas-list" type="application/json">
+        [
+            {
+                "wording": "Une tondeuse (qui démarre)<br/><small class='text-muted'>(Lien pour exemple)</small>",
+                "image": "https://m.media-amazon.com/images/I/71zt51r3IQL._AC_SL1500_.jpg",
+                "link": "https://www.amazon.fr/Klein-Garden-Tondeuse-lumi%C3%A8re-Enfants-2796/dp/B0BZWFS72F/ref=asc_df_B0BZWFS72F?mcid=abad8134563036f8ab6eaa5ce2fd0515&tag=googshopfr-21&linkCode=df0&hvadid=701498580897&hvpos=&hvnetw=g&hvrand=3371214670243064444&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9055826&hvtargid=pla-2017081783566&psc=1&hvocijid=3371214670243064444-B0BZWFS72F-&hvexpln=0"
+            },
+            {
+                "wording": "Un velo<br/><small class='text-muted'>(<a href='https://anti-crise.fr/catalogue/catalogue-smyths-toys-du-23-septembre-au-01-decembre-2025/#page284' target='_blank'>page 285 du catalogue Smyth</a>)</small>",
+                "image": "img/velo-285.bmp"
+            },
+            {
+                "wording": "Un Ninjago<br/><small class='text-muted'>(<a href='https://anti-crise.fr/catalogue/catalogue-smyths-toys-du-23-septembre-au-01-decembre-2025/#page214' target='_blank'>page 214 du catalogue Smyth</a>)</small>",
+                "image": "img/ninjago-214.bmp"
+            },
+            {
+                "wording": "Une combinaison de foot (Chaussure, short, maillot)<br/>Il met du 25 en chaussure, donc peut être prendre du 26, et il met du 4 ans"
+            },
+            {
+                "wording": "🚒​Un déguisement de pompier 👨🏻‍🚒"
+            },
+            {
+                "wording": "Une caisse enregistreuse 🏪"
+            },
+            {
+                "wording": "🔫 Pistolet (voir maman 🙄)"
+            },
+            {
+                "wording": "Tracteur 🚜 télécommandé <br/> (lui il dit \"qui bouge tout seul\", mais on imagine que c'est ça !"
+            },
+            {
+                "wording": "🚂​🚃​🚃​🚃​ Un train !"
+            },
+            {
+                "wording": "⌚ Un montre"
+            },
+            {
+                "wording": "Filet et ballon de volley 🏐"
+            }
+        ]
+    </script>
+
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="imageModalLabel">Image du Cadeau</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body text-center">
+            <img src="" class="img-fluid" id="modalImage" alt="Image agrandie du cadeau">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // --- Génération des Cards ---
+            const jsonString = $('#christmas-list').text();
+            const listData = JSON.parse(jsonString);
+            const container = $('#wishlist-container');
+
+            $.each(listData, function(index, item) {
+                const wording = item.wording;
+                const image = item.image || null;
+                const link = item.link;
+                const price = item.price;
+
+                let cardBody = `
+                    <div class="card-body text-center">
+                        <h5 class="card-title card-title-noel">${wording}</h5>
+                `;
+
+                if (price) {
+                    cardBody += `<p class="card-text card-price">Prix : ${price}</p>`;
+                }
+
+                if (link) {
+                    cardBody += `<a href="${link}" target="_blank" class="btn btn-sm" style="background-color: var(--noel-vert); color: white; border-color: var(--noel-vert);">Voir le produit</a>`;
+                }
+
+                cardBody += `</div>`;
+
+                let img_html = '';
+                if (image) {
+                    // MODIFICATION: L'image est enveloppée dans une balise <a>
+                    // avec les attributs Bootstrap de la modal.
+                    img_html = `
+                        <a href="#" class="img-link" data-bs-toggle="modal" data-bs-target="#imageModal" data-image-url="${image}" data-image-title="${wording.replace(/<[^>]*>/g, '')}">
+                            <img src="${image}" class="card-img-top img-card" alt="${wording}">
+                        </a>
+                    `;
+                }
+                
+                const cardHtml = `
+                    <div class="col">
+                        <div class="card card-noel d-flex flex-column">
+                            ${img_html}
+                            ${cardBody}
+                        </div>
+                    </div>
+                `;
+                container.append(cardHtml);
+            });
+
+            // MODIFICATION: Nouveau script pour gérer l'ouverture de la modal
+            $('#imageModal').on('show.bs.modal', function (event) {
+                const button = $(event.relatedTarget); // Le lien <a> qui a déclenché la modal
+                const imageUrl = button.data('image-url'); // Récupère l'URL stockée dans l'attribut data-image-url
+                const imageTitle = button.data('image-title'); // Récupère le titre du cadeau
+
+                const modal = $(this);
+                
+                // Mettre à jour l'image et le titre dans la modal
+                modal.find('#modalImage').attr('src', imageUrl);
+                modal.find('#imageModalLabel').text(`Détail : ${imageTitle}`);
+            });
+            
+            // --- Génération des Flocons (Inchangé) ---
+            function createSnowflake() {
+                const floconContainer = $('#header-flocons');
+                const flocon = $('<div>').addClass('flocon');
+
+                const colors = ['#FFFFFF', '#F0F8FF', '#ADD8E6', '#B0E0E6', '#87CEFA'];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                const randomSize = Math.floor(Math.random() * 10) + 3; 
+                const randomDuration = Math.random() * 10 + 5; 
+                const lateralMovement = Math.random() * 60 - 30;
+                const startPosition = Math.random() * 100;
+                
+                flocon.css({
+                    'width': `${randomSize}px`,
+                    'height': `${randomSize}px`,
+                    'background-color': randomColor,
+                    'left': `${startPosition}%`,
+                    'animation-duration': `${randomDuration}s`,
+                    'animation-delay': `-${Math.random() * randomDuration}s`,
+                    '--mouvement-lateral': `${lateralMovement}px`
+                });
+                
+                floconContainer.append(flocon);
+                
+                flocon.on('animationend', function() {
+                    $(this).remove();
+                    createSnowflake(); 
+                });
+            }
+
+            const initialSnowflakes = 40;
+            for (let i = 0; i < initialSnowflakes; i++) {
+                setTimeout(createSnowflake, i * 200); 
+            }
+        });
+    </script>
+
+</body>
+</html>
