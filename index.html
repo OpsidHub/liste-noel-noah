@@ -59,6 +59,48 @@
             margin-top: 10px;
         }
 
+        /* Styles pour les cartes marquées comme 'prises' */
+        .card-purchased {
+            opacity: 0.6; /* Rendre la carte un peu transparente */
+            background-color: #f0f0f0; /* Fond légèrement grisé */
+            border: 3px solid #ccc !important; /* Bordure plus discrète */
+            pointer-events: none; /* Désactiver les interactions (hover, clic) */
+            transition: none !important; /* Désactiver l'effet hover */
+            position: relative;
+        }
+
+        /* Texte barré pour les cartes prises */
+        .card-purchased .card-title-noel {
+            text-decoration: line-through;
+            color: #888; /* Couleur du texte grisé */
+        }
+
+        /* Pour le prix aussi */
+        .card-purchased .card-price {
+            text-decoration: line-through;
+            color: #888;
+        }
+
+        /* Ajouter un tampon 'PRIS' */
+        .card-purchased::after {
+            content: "RÉSERVÉ !";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-20deg);
+            color: var(--noel-rouge);
+            font-size: 2em;
+            font-weight: bold;
+            opacity: 0.9;
+            border: 4px dashed var(--noel-rouge);
+            padding: 5px 15px;
+            background-color: rgba(255, 255, 255, 0.7);
+            z-index: 10;
+            /* NOUVEAUTÉ : Centrage du contenu à l'intérieur du pseudo-élément */
+            display: flex;
+            justify-content: center; /* Centrage horizontal */
+            align-items: center;            /* Centrage vertical */
+        }
         /* MODIFICATION: Cursor pointer pour indiquer la cliquabilité */
         .img-link {
             cursor: pointer;
@@ -136,7 +178,8 @@
                 "wording": "La Pat'Patrouille - Figurine Marcus et Son Camion de Pompier",
                 "image": "https://image.smythstoys.com/zoom/175186.webp",
                 "link": "https://www.smythstoys.com/fr/fr-fr/jouets/jouets-prescolaires/jouets-la-patpatrouille/la-patpatrouille-figurine-marcus-et-son-camion-de-pompier/p/175186",
-                "price" : "12,99"
+                "price" : "12,99",
+                "purchased": true
             },            
             {
                 "wording": "La Pat'Patrouille - Figurine Ryder Et Son Quad",
@@ -166,7 +209,8 @@
                 "wording": "Croque Carotte Pat'Patrouille",
                 "image": "https://images.king-jouet.com/6/gu986669_6.jpg",
                 "link": "https://www.king-jouet.com/jeu-jouet/jeux-societes/jeux-ambiance/ref-986669-croque-carotte-pat-patrouille.htm",
-                "price" : "27,99"
+                "price" : "27,99",
+                "purchased": true
             },
             {
                 "wording": "Caisse enregistreuse",
@@ -182,7 +226,8 @@
                 "wording": "Une combinaison de foot (Short, maillot)<br/>Les chaussures sont prises !"
             },
             {
-                "wording": "🚒​Un déguisement de pompier 👨🏻‍🚒"
+                "wording": "🚒​Un déguisement de pompier 👨🏻‍🚒",
+                "purchased": true
             },
             {
                 "wording": "🔫 Pistolet (voir maman 🙄)"
@@ -191,10 +236,11 @@
                 "wording": "Tracteur 🚜 télécommandé <br/> (lui il dit \"qui bouge tout seul\", mais on imagine que c'est ça !"
             },
             {
-                "wording": "🚂​🚃​🚃​🚃​ Un train ! Et surtout, un train <u><b>avec des voyageurs !</b></u> - Debrouillez-vous !"
+                "wording": "🚂​🚃​🚃​🚃​ Un train ! Et surtout, un train <u><b>avec des voyageurs !</b></u> - Debrouillez-vous !",
+                "purchased": true
             },
             {
-                "wording": "Filet, ballon et/ou combinaison de volley 🏐"
+                "wording": "Ballon et/ou combinaison de volley 🏐 (Fillet en cours de création !)"
             }
         ]
     </script>
@@ -234,6 +280,7 @@
                 const image = item.image || null;
                 const link = item.link;
                 const price = item.price;
+                const isPurchased = item.purchased || false;
 
                 let cardBody = `
                     <div class="card-body text-center">
@@ -260,10 +307,11 @@
                         </a>
                     `;
                 }
-                
+                const purchasedClass = isPurchased ? 'card-purchased' : '';
+
                 const cardHtml = `
                     <div class="col">
-                        <div class="card card-noel d-flex flex-column">
+                        <div class="card card-noel d-flex flex-column ${purchasedClass}">
                             ${img_html}
                             ${cardBody}
                         </div>
@@ -326,7 +374,6 @@
 </body>
 
 </html>
-
 
 
 
